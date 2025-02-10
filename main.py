@@ -27,7 +27,7 @@ async def generate_content(prompt_text: str) -> str:
         url = 'http://localhost:11434/generate'  # Default Ollama server URL
         headers = {'Content-Type': 'application/json'}
         payload = {
-            'model': 'llama2',  # Replace with the model you have installed
+            'model': 'tulu3',  # Replace with the model you have installed
             'prompt': prompt_text
         }
         async with session.post(url, headers=headers, data=json.dumps(payload)) as response:
