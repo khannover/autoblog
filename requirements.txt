@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+nicegui
+sqlalchemy
+aiohttp
+pydantic
+databases
