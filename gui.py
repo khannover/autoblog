@@ -22,6 +22,9 @@ def main():
 
         with ui.header():
             ui.label('Dynamic Blog').classes('text-4xl font-bold mx-auto')
+            ui.button('Create Post', on_click=lambda: ui.open('/create'))
+            ui.label('Dynamic Blog').classes('text-4xl font-bold mx-auto')
+
 
         with ui.column().classes('items-center'):
             for post in posts:
@@ -61,6 +64,26 @@ def main():
             ui.label('Post not found').classes('text-red-500 text-xl')
 
     ui.run(title='Dynamic Blog', port=8001)
+
+@ui.page('/create')
+def create_post():
+    with ui.form():
+        title = ui.input('Title').classes('w-full')
+        prompt = ui.textarea('Prompt').classes('w-full h-40')
+        ui.button('Submit', on_click=lambda: submit_post(title.value, prompt.value))
+
+def submit_post(title, prompt):
+    async def post_data():
+        async with aiohttp.ClientSession() as session:
+            payload = {'title': title, 'prompt': prompt}
+            async with session.post(f'{API_URL}/posts/', json=payload) as response:
+                if response.status == 200:
+                    ui.notify('Post created successfully!')
+                    ui.open('/')
+                else:
+                    ui.notify('Failed to create post.', color='negative')
+    asyncio.ensure_future(post_data())
+
 
 if __name__ == '__main__':
     main()
