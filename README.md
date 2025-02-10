@@ -35,3 +35,36 @@ A Python blog engine using FastAPI, NiceGUI, and Ollama to generate dynamic cont
 ```bash
 git clone https://github.com/yourusername/dynamic-blog-engine.git
 cd dynamic-blog-engine
+```
+
+### Build the Docker Image
+
+```bash
+docker build -t dynamic-blog .
+```
+
+## Usage
+
+### Run the Docker Container
+
+```bash
+docker run -p 8000:8000 -p 8001:8001 dynamic-blog
+```
+
+### Run with Docker Compose
+
+```bash
+docker-compose up -d --build
+```
+**Note:** The first time you run the container, Ollama may take some time to set up.
+
+## Access the Application
+
+  - Frontend (NiceGUI): Open your browser and navigate to http://localhost:8001.
+  - Backend (FastAPI): API endpoints are available at http://localhost:8000.
+
+
+
+
+
+
